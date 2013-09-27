@@ -1,0 +1,26 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <ucontext.h>
+
+typedef struct st_TCB
+{
+	int tid;
+	ucontext_t* context;
+	TCB *waiting_for_me;
+} TCB;
+
+
+int uth_init()
+{
+
+}
+
+int uth_create(void * (*start_routine)(void*), void * arg)
+{
+
+}
+
+int uth_yield(void)
+{
+
+}
