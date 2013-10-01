@@ -1,4 +1,3 @@
-#include "uthread.h"
 #include "listas.h"
 #define NULL 0
 
