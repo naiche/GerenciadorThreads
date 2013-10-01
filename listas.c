@@ -1,4 +1,5 @@
 #include "uthread.h"
+#include "listas.h"
 
 
 ItemList* createList(void)
