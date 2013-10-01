@@ -5,8 +5,9 @@
 */
 #include "uthread.h"
 
-typedef struct itemLista ItemList;
-struct itemLista
+typedef struct TipoTCBLista ItemList;
+
+struct TipoTCBLista
 {
 	TCB *thTCB;
 	ItemList *proximo;
