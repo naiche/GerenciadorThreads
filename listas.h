@@ -5,11 +5,12 @@
 */
 #include "uthread.h"
 
-typedef struct itemLista ItemList;
-struct itemLista
+typedef struct TipoTCBList ItemList;
+
+struct TipoTCBList 
 {
-	TCB *thTCB;
-	ItemList *proximo;
+	TCB* thTCB;
+	ItemList* proximo;
 };
 
 /*Create a new list

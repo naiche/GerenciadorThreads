@@ -1,5 +1,6 @@
-#include "uthread.h"
+//#include "uthread.h"
 #include "listas.h"
+#define NULL 0
 
 
 ItemList* createList(void)
@@ -10,10 +11,10 @@ ItemList* createList(void)
 
 TCB* removeFromList(ItemList *threadList, int tid)
 {
-	ItemLista *ant = NULL; //ponteiro auxiliar para a posição anterior
-	ItemLista *ptaux = threadList; //ponteiro auxiliar para percorrer a lista
+	ItemList *ant = NULL; //ponteiro auxiliar para a posição anterior
+	ItemList *ptaux = threadList; //ponteiro auxiliar para percorrer a lista
 
-     	while (ptaux !=NULL && (ptaux->thTCB.tid != tid))      	//procura o elemento na lista
+     	while (ptaux != NULL && (ptaux->thTCB->tid != tid))      	//procura o elemento na lista
      	{
 		ant = ptaux;
 		ptaux = ptaux->proximo;
@@ -37,7 +38,7 @@ TCB* removeFromList(ItemList *threadList, int tid)
 
 TCB* removeFirstList(ItemList *threadList)
 {
-	ItemLista *ptaux = threadList; //ponteiro auxiliar para salvar o endereco do primeiro
+	ItemList *ptaux = threadList; //ponteiro auxiliar para salvar o endereco do primeiro
 
      	if (ptaux == NULL)  //se nao achou
 	{
@@ -51,12 +52,12 @@ TCB* removeFirstList(ItemList *threadList)
 }
 
 
-ItemList* destroy(ItemList* threadList)
+ItemList* destroy(ItemList *threadList)
 {
-	ItemLista *ptaux; //ponteiro auxiliar para percorrer a lista
-    	ItemLista *inicio; //ponteiro auxiliar para marcar o inicio da lista
+	ItemList *ptaux; //ponteiro auxiliar para percorrer a lista
+    	ItemList *inicio; //ponteiro auxiliar para marcar o inicio da lista
 
-    	inicio = threadlList;
+    	inicio = threadList;
     	while (threadList->proximo != inicio)
     	{
         	ptaux = threadList;
