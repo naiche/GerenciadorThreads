@@ -8,6 +8,12 @@
 
 #include <ucontext.h>
 
+/*DEFINES*/
+#define STACKSIZE 10485760 //Stacksize for contexts
+#define OK 0				//Ok return of the functions
+#define ERROR -1			//Flag of error
+
+/*TYPES*/
 typedef struct st_TCB TCB;
 struct st_TCB
 {

@@ -7,7 +7,12 @@
 #ifndef __uthread__
 #define __uthread__ 1
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/mman.h>
+#include <ucontext.h>
 #include "typedefs.h"
+#include "tid.h"
 
 int uth_init();
 int uth_create(void * (*start_routine)(void*), void * arg);

@@ -11,4 +11,4 @@ uthread.o: uthread.c
 	gcc -c uthread.c -Wall
 
 clean:
-	rm -rf *.a test
+	rm -rf *.a *.o test

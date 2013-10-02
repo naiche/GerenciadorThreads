@@ -3,5 +3,6 @@
 int main()
 {
 	uth_init();
+	uth_create(foo, NULL);
 	return 0;
 }

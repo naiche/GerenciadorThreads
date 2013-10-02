@@ -7,6 +7,10 @@
 #ifndef __uthread__
 #define __uthread__ 1
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/mman.h>
+#include <ucontext.h>
 #include "typedefs.h"
 #include "tid.h"
 
