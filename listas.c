@@ -25,7 +25,7 @@ int insertList(ItemList *threadList, TCB *aThread)
 	}
 	else
 	{
-		while (ptaux->proximo != NULL)      	//procura o elemento na lista
+		while (ptaux->proximo != NULL)      	//procura o fim da lista
      		{
 			ptaux = ptaux->proximo;
 			length++;
