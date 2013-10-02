@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <ucontext.h>
 #include "uthread.h"
-#include "tid.h"
 
 int uth_init()
 {

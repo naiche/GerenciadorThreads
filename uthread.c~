@@ -4,14 +4,6 @@
 #include "uthread.h"
 #include "tid.h"
 
-typedef struct st_TCB TCB;
-struct st_TCB
-{
-	int tid;
-	ucontext_t* context;
-	TCB *waiting_for_me;
-};
-
 int uth_init()
 {
 	set_tid(0);

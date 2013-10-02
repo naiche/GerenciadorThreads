@@ -1,0 +1,9 @@
+/*
+* typedefs.h: Arquivo com as definições de tipo.
+*
+* NÃO MODIFIQUE ESTE ARQUIVO.
+*/
+#ifndef __typedefs__
+#define __typedefs__ 1
+
+#endif

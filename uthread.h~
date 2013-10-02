@@ -7,6 +7,8 @@
 #ifndef __uthread__
 #define __uthread__ 1
 
+#include "typedefs.h"
+
 int uth_init();
 int uth_create(void * (*start_routine)(void*), void * arg);
 int uth_yield(void);
