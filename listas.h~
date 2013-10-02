@@ -17,7 +17,7 @@ struct TipoTCBList
 	return: pointer to the first element of the list 
 */
 ItemList* createList(void);
-//
+
 
 /*Inserts an element at the end of the list
 	ItemList *threadList: pointer to the first element of the list
