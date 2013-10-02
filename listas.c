@@ -34,6 +34,33 @@ int insertList(ItemList *threadList, TCB *aThread)
 	return length;
 }
 
+int insertList(ItemList *threadList, TCB *aThread)
+{
+	ItemList *novo; //novo elemento
+	int length = 1;
+	ItemList *ptaux = threadList; //ponteiro auxiliar para percorrer a lista     	
+	
+	novo = (ItemList*) malloc(sizeof(ItemList));
+	novo->thTCB = aThread;
+	novo->proximo = NULL;
+
+	if (threadList == NULL)
+	{
+		threadList = novo;
+	}
+	else
+	{
+		while (ptaux->proximo != NULL)      	//procura o fim da lista
+     		{
+			ptaux = ptaux->proximo;
+			length++;
+     		}
+		ptaux->proximo = novo;
+	}	
+	return length;
+}
+
+
 TCB* removeFromList(ItemList *threadList, int tid)
 {
 	ItemList *ant = NULL; //ponteiro auxiliar para a posição anterior
