@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "listas.h"
-//#define NULL 0
+#define NULL 0
 
 
 ItemList* createList(void)
