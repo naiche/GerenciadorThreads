@@ -1,6 +1,6 @@
-//#include "uthread.h"
+#include <stdio.h>
 #include "listas.h"
-#define NULL 0
+//#define NULL 0
 
 
 ItemList* createList(void)
@@ -8,114 +8,127 @@ ItemList* createList(void)
 	return NULL;
 }
 
-int insertList(ItemList *threadList, TCB *aThread)
-{
-	ItemList *novo; //novo elemento
-	int length = 1;
-	ItemList *ptaux = threadList; //ponteiro auxiliar para percorrer a lista     	
-	
-	novo = (ItemList*) malloc(sizeof(ItemList));
-	novo->thTCB = aThread;
-	novo->proximo = NULL;
 
-	if (threadList == NULL)
-	{
-		threadList = novo;
-	}
-	else
-	{
-		while (ptaux->proximo != NULL)      	//procura o elemento na lista
-     		{
-			ptaux = ptaux->proximo;
-			length++;
-     		}
-		ptaux->proximo = novo;
-	}	
-	return length;
+int showList(ItemList *threadList)
+{
+    int length = 0;
+    ItemList *ptaux = threadList; //ponteiro auxiliar para percorrer a lista
+    //printf("ptaux: %d\n", ptaux);
+    
+    if (ptaux == NULL)
+    {
+        printf("\n\nLista vazia\n\n"); 
+        return length;
+    }
+    else
+    {
+        length++;
+        printf("\nshow tid: %d\n", ptaux->thTCB->tid); 
+        while (ptaux->proximo != NULL)      	//procura o fim da lista
+        {
+             ptaux = ptaux->proximo;
+             length++;
+             printf("show tid: %d\n", ptaux->thTCB->tid); 
+        }
+        printf("\n\n"); 
+    }
+    return length;
 }
 
-int insertList(ItemList *threadList, TCB *aThread)
+
+int insertList(ItemList **threadList, TCB *aThread)
 {
 	ItemList *novo; //novo elemento
 	int length = 1;
-	ItemList *ptaux = threadList; //ponteiro auxiliar para percorrer a lista     	
 	
-	novo = (ItemList*) malloc(sizeof(ItemList));
+    novo = (ItemList*) malloc(sizeof(ItemList));
 	novo->thTCB = aThread;
 	novo->proximo = NULL;
 
-	if (threadList == NULL)
+	if (*threadList == NULL)
 	{
-		threadList = novo;
+		*threadList = novo;
 	}
-	else
+    else
 	{
+        ItemList *ptaux; 
+        ptaux = *threadList; //ponteiro auxiliar para percorrer a lista
+    
 		while (ptaux->proximo != NULL)      	//procura o fim da lista
-     		{
+		{
+                                //     printf("\n\n&ptaux: %d", &ptaux);
+                                //     printf("\nptaux: %d", ptaux);
+                                //     printf("\n*ptaux: %d", *ptaux);   
+                            //     printf("\n&tList: %d", threadList);
+                            //     printf("\ntList: %d", threadList);
+                            //     printf("\n*tList: %d", *threadList);
+                            //     printf("\n**tList: %d\n\n", **threadList);      
 			ptaux = ptaux->proximo;
 			length++;
-     		}
+ 		}
 		ptaux->proximo = novo;
-	}	
+	}
 	return length;
 }
 
 
-TCB* removeFromList(ItemList *threadList, int tid)
+TCB* removeFromList(ItemList **threadList, int tid)
 {
 	ItemList *ant = NULL; //ponteiro auxiliar para a posição anterior
-	ItemList *ptaux = threadList; //ponteiro auxiliar para percorrer a lista
+	ItemList *ptaux;
+    ptaux = *threadList; //ponteiro auxiliar para percorrer a lista
 
-     	while (ptaux != NULL && (ptaux->thTCB->tid != tid))      	//procura o elemento na lista
-     	{
+
+    while (ptaux != NULL && ptaux->thTCB->tid != tid)      	//procura o elemento na lista
+    {
 		ant = ptaux;
 		ptaux = ptaux->proximo;
-     	}
+ 	}
 
-     	if (ptaux == NULL)  //se nao achou
+    if (ptaux == NULL)  //se nao achou
 		return NULL;
 
-    	if (ant == NULL) 
+    if (ant == NULL) 
 	{
-		threadList = ptaux->proximo;  //Remove o primeiro elemento
-    		return ptaux;	
+		*threadList = ptaux->proximo;  //Remove o primeiro elemento
+		return ptaux->thTCB;	
 	}
 	else
 	{
 		ant->proximo = ptaux->proximo;  //Remove o elemento desejado
-    		return ptaux;	
+    	return ptaux->thTCB;	
 	}   
 }
 
 
-TCB* removeFirstList(ItemList *threadList)
+TCB* removeFirstList(ItemList **threadList)
 {
-	ItemList *ptaux = threadList; //ponteiro auxiliar para salvar o endereco do primeiro
+	ItemList *ptaux; //ponteiro auxiliar para salvar o endereco do primeiro
+    ptaux = *threadList; 
 
-     	if (ptaux == NULL)  //se nao achou
+    if (*threadList == NULL)  //se nao achou
 	{
 		return NULL;
 	}
     	else
 	{ 
-		threadList = threadList->proximo;  //Remove o primeiro elemento
-    		return ptaux;	
+		*threadList = (*threadList)->proximo;  //Remove o primeiro elemento
+		return ptaux->thTCB;	
 	}
 }
 
 
 ItemList* destroy(ItemList *threadList)
 {
-	ItemList *ptaux; //ponteiro auxiliar para percorrer a lista
-    	ItemList *inicio; //ponteiro auxiliar para marcar o inicio da lista
-
-    	inicio = threadList;
-    	while (threadList->proximo != inicio)
-    	{
-        	ptaux = threadList;
-         	threadList = threadList->proximo;
-         	free(ptaux);
-    	}
-    	free(threadList);
-    	return NULL;
+    ItemList *ptaux; //ponteiro auxiliar para percorrer a lista 
+   
+    while(threadList != NULL) 
+    {
+         ptaux = threadList; 
+         threadList = threadList->proximo; 
+         free(ptaux); 
+    } 
+    free(threadList); 
+    return NULL; 
+          
 }
